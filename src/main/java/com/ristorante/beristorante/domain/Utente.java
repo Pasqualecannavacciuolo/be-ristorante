@@ -1,36 +1,35 @@
 package com.ristorante.beristorante.domain;
 
-import java.util.Date;
+//import java.util.String;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Utente")
-
+@Table(name="utente")
 public class Utente {
     @Id
     private Integer id;
     private String nome_utente;
     private String salt;
     private String hash;
-    private Date modificato_da;
-    private Date modificato_il;
-    private Date creato_il;
+    private String modificato_da;
+    private String modificato_il;
+    private String creato_il;
     private String creato_da;
-    private Date ultima_modifica_password;
+    private String ultima_modifica_password;
     private String nome;
     private String cognome;
     private String email;
     private Boolean cambio_password;
-    private Date ultimo_accesso;
+    private String ultimo_accesso;
 
     // Costruttore di default
     public Utente(){}
 
     // Costruttore con tutti i campi
-    public Utente(Integer id, String nome_utente, String salt, String hash, Date modificato_da, Date modificato_il, Date creato_il, String creato_da, Date ultima_modifica_password, String nome, String cognome, String email, Boolean cambio_password, Date ultimo_accesso) {
+    public Utente(Integer id, String nome_utente, String salt, String hash, String modificato_da, String modificato_il, String creato_il, String creato_da, String ultima_modifica_password, String nome, String cognome, String email, Boolean cambio_password, String ultimo_accesso) {
         this.id = id;
         this.nome_utente = nome_utente;
         this.salt = salt;
@@ -80,27 +79,27 @@ public class Utente {
         this.hash = hash;
     }
 
-    public Date getModificato_da() {
+    public String getModificato_da() {
         return this.modificato_da;
     }
 
-    public void setModificato_da(Date modificato_da) {
+    public void setModificato_da(String modificato_da) {
         this.modificato_da = modificato_da;
     }
 
-    public Date getModificato_il() {
+    public String getModificato_il() {
         return this.modificato_il;
     }
 
-    public void setModificato_il(Date modificato_il) {
+    public void setModificato_il(String modificato_il) {
         this.modificato_il = modificato_il;
     }
 
-    public Date getCreato_il() {
+    public String getCreato_il() {
         return this.creato_il;
     }
 
-    public void setCreato_il(Date creato_il) {
+    public void setCreato_il(String creato_il) {
         this.creato_il = creato_il;
     }
 
@@ -112,11 +111,11 @@ public class Utente {
         this.creato_da = creato_da;
     }
 
-    public Date getUltima_modifica_password() {
+    public String getUltima_modifica_password() {
         return this.ultima_modifica_password;
     }
 
-    public void setUltima_modifica_password(Date ultima_modifica_password) {
+    public void setUltima_modifica_password(String ultima_modifica_password) {
         this.ultima_modifica_password = ultima_modifica_password;
     }
 
@@ -156,11 +155,11 @@ public class Utente {
         this.cambio_password = cambio_password;
     }
 
-    public Date getUltimo_accesso() {
+    public String getUltimo_accesso() {
         return this.ultimo_accesso;
     }
 
-    public void setUltimo_accesso(Date ultimo_accesso) {
+    public void setUltimo_accesso(String ultimo_accesso) {
         this.ultimo_accesso = ultimo_accesso;
     }
 
