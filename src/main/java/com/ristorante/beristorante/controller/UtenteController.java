@@ -35,8 +35,9 @@ public class UtenteController {
     }
 
     @DeleteMapping(path="/{id}")
-    ResponseEntity<Void> deleteOne(@PathVariable Integer id) {
+    ResponseEntity<String> deleteOne(@PathVariable Integer id) {
+        String message = "Utente con id =>"+id+" è stato cancellato con successo!";
         utenteService.deleteOne(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<String>(message, HttpStatus.OK);
     }
 }
