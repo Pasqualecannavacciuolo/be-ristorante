@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/ristorante")
+@RequestMapping("/ristorante/utenti")
 @CrossOrigin(origins = "*")
 public class UtenteController {
     @Autowired
@@ -23,7 +23,7 @@ public class UtenteController {
         return new ResponseEntity<Utente>((Utente) utenteService.findById(id).get(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/utenti")
+    @GetMapping(path = "/")
     ResponseEntity<?> findAll() {
         return new ResponseEntity<>(utenteService.findAll(), HttpStatus.OK);
     }
