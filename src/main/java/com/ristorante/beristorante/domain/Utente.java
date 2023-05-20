@@ -1,8 +1,12 @@
 package com.ristorante.beristorante.domain;
 
+import java.sql.Date;
+
 //import java.util.String;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,26 +14,27 @@ import javax.persistence.Table;
 @Table(name="utente")
 public class Utente {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome_utente;
     private String salt;
     private String hash;
-    private String modificato_da;
-    private String modificato_il;
-    private String creato_il;
-    private String creato_da;
-    private String ultima_modifica_password;
+    private Integer  modificato_da;
+    private Date modificato_il;
+    private Date creato_il;
+    private Integer creato_da;
+    private Date ultima_modifica_password;
     private String nome;
     private String cognome;
     private String email;
     private Boolean cambio_password;
-    private String ultimo_accesso;
+    private Date ultimo_accesso;
 
     // Costruttore di default
     public Utente(){}
 
     // Costruttore con tutti i campi
-    public Utente(Integer id, String nome_utente, String salt, String hash, String modificato_da, String modificato_il, String creato_il, String creato_da, String ultima_modifica_password, String nome, String cognome, String email, Boolean cambio_password, String ultimo_accesso) {
+    public Utente(Integer id, String nome_utente, String salt, String hash, Integer modificato_da, Date modificato_il, Date creato_il, Integer creato_da, Date ultima_modifica_password, String nome, String cognome, String email, Boolean cambio_password, Date ultimo_accesso) {
         this.id = id;
         this.nome_utente = nome_utente;
         this.salt = salt;
@@ -47,6 +52,7 @@ public class Utente {
     }
 
     /* GETTER & SETTER */
+
     public Integer getId() {
         return this.id;
     }
@@ -79,43 +85,43 @@ public class Utente {
         this.hash = hash;
     }
 
-    public String getModificato_da() {
+    public Integer getModificato_da() {
         return this.modificato_da;
     }
 
-    public void setModificato_da(String modificato_da) {
+    public void setModificato_da(Integer modificato_da) {
         this.modificato_da = modificato_da;
     }
 
-    public String getModificato_il() {
+    public Date getModificato_il() {
         return this.modificato_il;
     }
 
-    public void setModificato_il(String modificato_il) {
+    public void setModificato_il(Date modificato_il) {
         this.modificato_il = modificato_il;
     }
 
-    public String getCreato_il() {
+    public Date getCreato_il() {
         return this.creato_il;
     }
 
-    public void setCreato_il(String creato_il) {
+    public void setCreato_il(Date creato_il) {
         this.creato_il = creato_il;
     }
 
-    public String getCreato_da() {
+    public Integer getCreato_da() {
         return this.creato_da;
     }
 
-    public void setCreato_da(String creato_da) {
+    public void setCreato_da(Integer creato_da) {
         this.creato_da = creato_da;
     }
 
-    public String getUltima_modifica_password() {
+    public Date getUltima_modifica_password() {
         return this.ultima_modifica_password;
     }
 
-    public void setUltima_modifica_password(String ultima_modifica_password) {
+    public void setUltima_modifica_password(Date ultima_modifica_password) {
         this.ultima_modifica_password = ultima_modifica_password;
     }
 
@@ -155,13 +161,14 @@ public class Utente {
         this.cambio_password = cambio_password;
     }
 
-    public String getUltimo_accesso() {
+    public Date getUltimo_accesso() {
         return this.ultimo_accesso;
     }
 
-    public void setUltimo_accesso(String ultimo_accesso) {
+    public void setUltimo_accesso(Date ultimo_accesso) {
         this.ultimo_accesso = ultimo_accesso;
     }
+    
 
 
 

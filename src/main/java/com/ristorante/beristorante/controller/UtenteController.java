@@ -29,9 +29,9 @@ public class UtenteController {
     }
 
     @PostMapping
-    ResponseEntity<Utente> saveOne(@RequestBody Utente Utente) {
-        Utente Utente1 = utenteService.saveOne(Utente);
-        return new ResponseEntity<>(Utente1, HttpStatus.OK);
+    ResponseEntity<Utente> saveOne(@RequestBody Utente utente) {
+        Utente utente1 = utenteService.saveOne(utente);
+        return new ResponseEntity<>(utente1, HttpStatus.OK);
     }
 
     @DeleteMapping(path="/{id}")
