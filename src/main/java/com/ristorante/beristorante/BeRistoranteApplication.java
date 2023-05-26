@@ -12,9 +12,9 @@ public class BeRistoranteApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BeRistoranteApplication.class, args);
-		for (int i = 0; i < 10000; i++) {
+		/*for (int i = 0; i < 10000; i++) {
 			logger.info("Messaggio di prova per il LOG");	
-		}
+		}*/
 	}
 
 }
