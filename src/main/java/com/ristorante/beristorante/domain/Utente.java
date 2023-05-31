@@ -2,17 +2,20 @@ package com.ristorante.beristorante.domain;
 
 import java.sql.Date;
 
-//import java.util.String;
-
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+import com.ristorante.beristorante.enums.Role;
+
 @Entity
 @Table(name="utente")
-public class Utente {
+public class Utente{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -29,6 +32,8 @@ public class Utente {
     private String email;
     private Boolean cambio_password;
     private Date ultimo_accesso;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     // Costruttore di default
     public Utente(){}
@@ -49,6 +54,7 @@ public class Utente {
         this.email = email;
         this.cambio_password = cambio_password;
         this.ultimo_accesso = ultimo_accesso;
+        this.role = Role.USER;
     }
 
     /* GETTER & SETTER */
@@ -168,6 +174,7 @@ public class Utente {
     public void setUltimo_accesso(Date ultimo_accesso) {
         this.ultimo_accesso = ultimo_accesso;
     }
+
     
 
 
