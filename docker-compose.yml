@@ -1,0 +1,34 @@
+version: '0.1'
+services:
+  Springboot:
+    image: 'be-ristorante.jar'
+    ports:
+      - "8081:8081"
+    depends_on:
+      PostgreSQL:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/ristorante
+      - SPRING_DATASOURCE_USERNAME=pasquale
+      - SPRING_DATASOURCE_PASSWORD=progetto123
+      - SPRING_JPA_DATABASE-PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_GENERATE-DDL=true
+      - SPRING_JPA_OPEN-IN-VIEW=true
+
+  PostgreSQL:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=progetto123
+      - POSTGRES_USER=pasquale
+      - POSTGRES_DB=ristorante
+      - PGDATA=/pgdata
+    volumes:
+      - ./pgdata:/pgdata
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ristorante"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
