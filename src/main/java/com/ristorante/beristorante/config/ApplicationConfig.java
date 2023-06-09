@@ -11,12 +11,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.ristorante.beristorante.repository.UtenteAuthRepository;
+import com.ristorante.beristorante.repository.UtenteRepository;
 
 @Configuration
 public class ApplicationConfig {
 
-    private final UtenteAuthRepository repository;
+    private final UtenteRepository repository;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -42,7 +42,7 @@ public class ApplicationConfig {
         return new BCryptPasswordEncoder();
     }
 
-    public ApplicationConfig(UtenteAuthRepository repository) {
+    public ApplicationConfig(UtenteRepository repository) {
         this.repository = repository;
     }
 

@@ -19,8 +19,8 @@ public class UtenteController {
 
     @GetMapping(path = "/{id}")
     ResponseEntity<Utente> findById(@PathVariable Integer id) {
-        Optional<Utente> utente = utenteService.findById(id);
-        return new ResponseEntity<Utente>((Utente) utenteService.findById(id).get(), HttpStatus.OK);
+        Utente utente = utenteService.findById(id);
+        return new ResponseEntity<Utente>(utente, HttpStatus.OK);
     }
 
     @GetMapping(path = "/")

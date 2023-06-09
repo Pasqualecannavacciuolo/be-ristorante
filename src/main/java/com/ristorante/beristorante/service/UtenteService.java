@@ -15,8 +15,8 @@ public class UtenteService {
     @Autowired 
     UtenteRepository utenteRepository;
 
-    public Optional<Utente> findById(Integer id) {
-        return utenteRepository.findById(id);
+    public Utente findById(Integer id) {
+        return utenteRepository.findById(id).orElse(null);
     }
 
     public List<Utente> findAll() {
@@ -35,7 +35,7 @@ public class UtenteService {
             utente.setCreato_da(newUtente.getCreato_da());
             utente.setCreato_il(newUtente.getCreato_il());
             utente.setEmail(newUtente.getEmail());
-            utente.setHash(newUtente.getHash());
+            utente.setPassword(newUtente.getPassword());
             //utente.setId(newUtente.getId());
             utente.setModificato_da(newUtente.getModificato_da());
             utente.setModificato_il(newUtente.getModificato_il());
