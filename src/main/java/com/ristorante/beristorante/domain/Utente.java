@@ -52,7 +52,7 @@ public class Utente implements UserDetails{
     /* Metodi di Spring Security */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override

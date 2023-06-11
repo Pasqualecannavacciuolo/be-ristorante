@@ -3,6 +3,8 @@ package com.ristorante.beristorante.auth;
 
 import java.sql.Date;
 
+import com.ristorante.beristorante.enums.Role;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,4 +29,5 @@ public class RegisterRequest {
     private String email;
     private Boolean cambio_password;
     private Date ultimo_accesso;
+    private Role role;
 }
