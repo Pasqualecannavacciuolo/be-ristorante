@@ -2,19 +2,33 @@ package com.ristorante.beristorante;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 @SpringBootApplication
 public class BeRistoranteApplication {
 
-	private static final Logger logger = LogManager.getLogger(BeRistoranteApplication.class);
-
 	public static void main(String[] args) {
 		SpringApplication.run(BeRistoranteApplication.class, args);
-		/*for (int i = 0; i < 10000; i++) {
-			logger.info("Messaggio di prova per il LOG");	
-		}*/
 	}
+
+	@Bean
+        public CorsFilter corsFilter() {
+            final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+            final CorsConfiguration config = new CorsConfiguration();
+            config.setAllowCredentials(true);
+            config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+            config.setAllowedHeaders(Collections.singletonList("*"));
+            config.setAllowedMethods(Arrays.stream(HttpMethod.values()).map(HttpMethod::name).collect(Collectors.toList()));
+            source.registerCorsConfiguration("/**", config);
+            return new CorsFilter(source);
+        }
 
 }

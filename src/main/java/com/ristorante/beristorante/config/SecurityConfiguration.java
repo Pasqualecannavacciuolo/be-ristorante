@@ -27,7 +27,6 @@ import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -57,6 +56,7 @@ public class SecurityConfiguration {
             .and()
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        //http.cors();
         return http.build();
     }
 }

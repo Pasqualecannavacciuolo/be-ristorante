@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/ristorante/management/utenti")
 @PreAuthorize("hasRole('ADMIN')")
-@CrossOrigin(origins = "*")
+@CrossOrigin("http://localhost:4200")
 public class UtenteController {
     @Autowired
     UtenteService utenteService;
