@@ -3,6 +3,9 @@ package com.ristorante.beristorante.controller;
 import com.ristorante.beristorante.domain.Utente;
 import com.ristorante.beristorante.service.UtenteService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,7 @@ public class UtenteController {
     @Autowired
     UtenteService utenteService;
     
-    @GetMapping /*(path = "/")*/
+    @GetMapping(path = "/")
     @PreAuthorize("hasAuthority('admin:read')")
     ResponseEntity<?> findAll() {
         return new ResponseEntity<>(utenteService.findAll(), HttpStatus.OK);
@@ -45,9 +48,11 @@ public class UtenteController {
 
     @DeleteMapping(path="/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
-    ResponseEntity<String> deleteOne(@PathVariable Integer id) {
+    ResponseEntity<Object> deleteOne(@PathVariable Integer id) {
         String message = "Utente con id =>"+id+" è stato cancellato con successo!";
+        Map<String, String> deleteMessage = new HashMap<>();
+        deleteMessage.put("message", message);
         utenteService.deleteOne(id);
-        return new ResponseEntity<String>(message, HttpStatus.OK);
+        return new ResponseEntity<>(deleteMessage, HttpStatus.OK);
     }
 }
