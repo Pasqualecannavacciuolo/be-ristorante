@@ -6,6 +6,9 @@ import com.ristorante.beristorante.service.UtenteService;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.json.JSONException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +33,18 @@ public class UtenteController {
     @PreAuthorize("hasAuthority('admin:read')")
     ResponseEntity<Utente> findById(@PathVariable Integer id) {
         Utente utente = utenteService.findById(id);
+        return new ResponseEntity<Utente>(utente, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/byEmail")
+    @PreAuthorize("hasAuthority('admin:read')")
+    ResponseEntity<Utente> findByEmail(@RequestBody String email) {
+        //System.out.println("UNICA_EMAIL: "+email);
+        //JSONObject jsonObject = new JSONObject(email);
+        //System.out.println("UNICA_EMAIL: "+ jsonObject.getString("email"));
+        //Utente utente = utenteService.findByEmail(jsonObject.getString("email"));
+        Utente utente = utenteService.findByEmail(email);
+        //System.out.println("UTENTE: "+ utente);
         return new ResponseEntity<Utente>(utente, HttpStatus.OK);
     }
 
