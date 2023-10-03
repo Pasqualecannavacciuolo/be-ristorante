@@ -1,19 +1,25 @@
 package com.ristorante.beristorante.service;
 
 import com.ristorante.beristorante.repository.UtenteRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ristorante.beristorante.domain.Utente;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UtenteService {
     
     @Autowired 
     UtenteRepository utenteRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public Utente findById(Integer id) {
         return utenteRepository.findById(id).orElse(null);
@@ -28,6 +34,23 @@ public class UtenteService {
     }
 
     public Utente saveOne(Utente utente) {
+        return utenteRepository.save(utente);
+    }
+
+    public Utente updateCambioPassword(Object parametri, Integer id) throws JsonProcessingException {
+        Utente utente = utenteRepository.getById(id);
+        // Crea un ObjectMapper
+        ObjectMapper objectMapper = new ObjectMapper();
+        // Converte l'oggetto in formato JSON
+        String jsonString = objectMapper.writeValueAsString(parametri);
+        JsonNode node = objectMapper.readValue(jsonString, JsonNode.class);
+        JsonNode newCambioPasswordNode = node.get("newCambioPassword");
+        Boolean newCambioPasswordFlag = newCambioPasswordNode.asBoolean();
+        JsonNode newPasswordNode = node.get("newPassword");
+        String newPassword = passwordEncoder.encode(newPasswordNode.asText());
+        System.out.println("JSON ---> "+newCambioPasswordFlag+newPassword);
+        utente.setCambio_password(newCambioPasswordFlag);
+        utente.setPassword(newPassword);
         return utenteRepository.save(utente);
     }
 
@@ -55,7 +78,6 @@ public class UtenteService {
             return utenteRepository.save(newUtente);
           });
         //return utenteRepository.save(newUtente);
-        
     }
 
     public void deleteOne(Integer id) {

@@ -1,5 +1,6 @@
 package com.ristorante.beristorante.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ristorante.beristorante.domain.Utente;
 import com.ristorante.beristorante.service.UtenteService;
 
@@ -57,6 +58,12 @@ public class UtenteController {
     @PreAuthorize("hasAuthority('admin:update')")
     ResponseEntity<Utente> changeOne(@RequestBody Utente newUtente, @PathVariable Integer id) {
         return new ResponseEntity<>(utenteService.changeOne(newUtente, id), HttpStatus.OK);
+    }
+
+    @PutMapping(path = "cambioPassword/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
+    ResponseEntity<Utente> updateCambioPassword(@RequestBody Object parametri, @PathVariable Integer id) throws JsonProcessingException {
+        return new ResponseEntity<>(utenteService.updateCambioPassword(parametri, id), HttpStatus.OK);
     }
 
     @DeleteMapping(path="/{id}")
