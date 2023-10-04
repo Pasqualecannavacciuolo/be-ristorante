@@ -1,6 +1,7 @@
 package com.ristorante.beristorante.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,13 @@ public class PiattoController {
     ResponseEntity<Piatto> findById(@PathVariable Integer id) {
         Piatto piatto = piattoService.findById(id);
         return new ResponseEntity<Piatto>(piatto, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "byMenuID/{id}")
+    @PreAuthorize("hasAuthority('admin:read')")
+    ResponseEntity<?> findByMenuId(@PathVariable Integer id) {
+        List<Piatto> piatti = piattoService.findByMenuId(id);
+        return new ResponseEntity<>(piatti, HttpStatus.OK);
     }
 
     @PostMapping

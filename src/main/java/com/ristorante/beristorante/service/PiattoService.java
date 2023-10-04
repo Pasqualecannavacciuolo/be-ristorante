@@ -22,6 +22,10 @@ public class PiattoService {
         return piattoRepository.findAll();
     }
 
+    public List<Piatto> findByMenuId(Integer id) {
+        return piattoRepository.findByMenuId(id);
+    }
+
     public Piatto saveOne(Piatto Piatto) {
         return piattoRepository.save(Piatto);
     }
