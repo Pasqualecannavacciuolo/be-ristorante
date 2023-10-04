@@ -33,7 +33,25 @@ public class MenuService {
         return menuRepository.save(menu);
     }
 
-    public Menu changeOne(Object parametri, Integer id) throws JsonProcessingException{
+    public Menu changeMenu(Object parametri, Integer id) throws JsonProcessingException {
+        System.out.println("JSON ---> "+parametri);
+        Menu menu = menuRepository.getById(id);
+        // Crea un ObjectMapper
+        ObjectMapper objectMapper = new ObjectMapper();
+        // Converte l'oggetto in formato JSON
+        String jsonString = objectMapper.writeValueAsString(parametri);
+        JsonNode node = objectMapper.readValue(jsonString, JsonNode.class);
+        JsonNode newNomeMenuNode = node.get("newNomeMenu");
+        String nomeMenu = newNomeMenuNode.asText();
+        JsonNode newAttivoNode = node.get("newAttivo");
+        Boolean Attivo = newAttivoNode.asBoolean();
+        System.out.println("JSON ---> "+nomeMenu+Attivo);
+        menu.setNome(nomeMenu);
+        menu.setAttivo(Attivo);
+        return menuRepository.save(menu);    
+    }
+
+    /*public Menu changeOne(Object parametri, Integer id) throws JsonProcessingException{
         Menu menu = menuRepository.getById(id);
         // Crea un ObjectMapper
         ObjectMapper objectMapper = new ObjectMapper();
@@ -49,7 +67,7 @@ public class MenuService {
         menu.setPiatto(newPiatto);
         menu.setDisponibile(Disponibile);
         return menuRepository.save(menu);       
-    }
+    }*/
 
     public void deleteOne(Integer id) {
         menuRepository.deleteById(id);

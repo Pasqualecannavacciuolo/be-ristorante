@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,9 +35,7 @@ public class Piatto {
     private Integer costo;
     private String descrizione;
 
-    @OneToMany
-    @JoinColumn(name = "piatto_id")
-    @JsonIgnore
-    private Set<Menu> menu;
+    @ManyToOne
+    Menu menu;
     
 }

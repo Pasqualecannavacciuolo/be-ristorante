@@ -48,10 +48,16 @@ public class MenuController {
         return new ResponseEntity<>(menu1, HttpStatus.OK);
     }
 
-    @PutMapping(path = "/{id}")
+    /*@PutMapping(path = "/{id}")
     @PreAuthorize("hasAuthority('admin:update')")
     ResponseEntity<Menu> changeOne(@RequestBody Object parametri, @PathVariable Integer id) throws JsonProcessingException {
         return new ResponseEntity<>(menuService.changeOne(parametri, id), HttpStatus.OK);
+    }*/
+
+    @PutMapping(path = "/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
+    ResponseEntity<Menu> changeMenu(@RequestBody Object parametri, @PathVariable Integer id) throws JsonProcessingException {
+        return new ResponseEntity<>(menuService.changeMenu(parametri, id), HttpStatus.OK);
     }
 
     @DeleteMapping(path="/{id}")
