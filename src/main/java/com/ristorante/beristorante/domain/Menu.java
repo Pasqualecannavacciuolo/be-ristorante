@@ -1,16 +1,13 @@
 package com.ristorante.beristorante.domain;
 
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +15,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Data
 @Getter
 @Setter
@@ -25,18 +23,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="piatto")
-public class Piatto {
+@Table(name="menu")
+public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
-    private Integer costo;
-    private String descrizione;
-
-    @OneToMany
-    @JoinColumn(name = "piatto_id")
-    @JsonIgnore
-    private Set<Menu> menu;
     
+    @ManyToOne
+    Piatto piatto;
+
+    private Boolean disponibile;
 }
