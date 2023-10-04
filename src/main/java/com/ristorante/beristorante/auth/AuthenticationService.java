@@ -2,7 +2,6 @@ package com.ristorante.beristorante.auth;
 
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.ristorante.beristorante.config.JwtService;
 import com.ristorante.beristorante.domain.Utente;
-import com.ristorante.beristorante.enums.Role;
 import com.ristorante.beristorante.repository.UtenteRepository;
 
 @Service
