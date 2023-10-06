@@ -28,6 +28,7 @@ public class Piatto {
     private String nome;
     private Integer costo;
     private String descrizione;
+    private Boolean checked;
 
     @ManyToOne
     Menu menu;

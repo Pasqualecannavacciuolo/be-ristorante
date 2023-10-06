@@ -1,6 +1,8 @@
 package com.ristorante.beristorante.service;
 
+import com.ristorante.beristorante.domain.Menu;
 import com.ristorante.beristorante.domain.Piatto;
+import com.ristorante.beristorante.repository.MenuRepository;
 import com.ristorante.beristorante.repository.PiattoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ public class PiattoService {
     
     @Autowired 
     PiattoRepository piattoRepository;
+    @Autowired
+    MenuRepository menuRepository;
 
     public Piatto findById(Integer id) {
         return piattoRepository.findById(id).orElse(null);
@@ -23,6 +27,13 @@ public class PiattoService {
     }
 
     public List<Piatto> findByMenuId(Integer id) {
+        List<Piatto> listaPiatti = piattoRepository.findByMenuId(id);
+        Menu menu = menuRepository.findById(id).orElse(null);
+        for (Piatto piatto : listaPiatti) {
+            if(piatto.getMenu() == menu) {
+                piatto.setChecked(true);
+            }
+        }
         return piattoRepository.findByMenuId(id);
     }
 
