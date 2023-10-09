@@ -1,7 +1,9 @@
 package com.ristorante.beristorante.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ristorante.beristorante.domain.Menu;
+import com.ristorante.beristorante.domain.Piatto;
 import com.ristorante.beristorante.service.MenuService;
+import com.ristorante.beristorante.service.PiattoService;
 
 @RestController
 @RequestMapping("/ristorante/management/menu")
@@ -27,6 +33,8 @@ public class MenuController {
     
     @Autowired
     MenuService menuService;
+    @Autowired
+    PiattoService piattoService;
 
     @GetMapping(path = "/")
     @PreAuthorize("hasAuthority('admin:read')")
@@ -46,6 +54,15 @@ public class MenuController {
     ResponseEntity<Menu> saveOne(@RequestBody Menu menu) {
         Menu menu1 = menuService.saveOne(menu);
         return new ResponseEntity<>(menu1, HttpStatus.OK);
+    }
+
+    @PostMapping("/addPiatti/{id}")
+    @PreAuthorize("hasAuthority('admin:create')")
+    ResponseEntity<Menu> addPiatti(@RequestBody Object lista_piatti, @PathVariable Integer id) throws JsonProcessingException{
+        
+        Menu menu_where_to_add = menuService.findById(id);
+        Menu new_menu_where_to_add = menuService.addPiatti(menu_where_to_add, lista_piatti);
+        return new ResponseEntity<>(new_menu_where_to_add,HttpStatus.OK);
     }
 
     /*@PutMapping(path = "/{id}")

@@ -26,16 +26,16 @@ public class PiattoService {
         return piattoRepository.findAll();
     }
 
-    public List<Piatto> findByMenuId(Integer id) {
-        List<Piatto> listaPiatti = piattoRepository.findByMenuId(id);
-        Menu menu = menuRepository.findById(id).orElse(null);
+    /*public List<Piatto> findByMenuId(Menu menu) {
+        List<Piatto> listaPiatti = piattoRepository.findByMenuId(menu);
+        Menu menu1 = menuRepository.findById(menu.getId()).orElse(null);
         for (Piatto piatto : listaPiatti) {
-            if(piatto.getMenu() == menu) {
+            if(piatto.getLista_menu() == menu1) {
                 piatto.setChecked(true);
             }
         }
-        return piattoRepository.findByMenuId(id);
-    }
+        return piattoRepository.findByMenuId(menu);
+    }*/
 
     public Piatto saveOne(Piatto Piatto) {
         return piattoRepository.save(Piatto);

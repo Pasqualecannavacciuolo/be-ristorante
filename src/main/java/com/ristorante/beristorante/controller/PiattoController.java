@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ristorante.beristorante.domain.Menu;
 import com.ristorante.beristorante.domain.Piatto;
 import com.ristorante.beristorante.service.PiattoService;
 
@@ -41,12 +42,12 @@ public class PiattoController {
         return new ResponseEntity<Piatto>(piatto, HttpStatus.OK);
     }
 
-    @GetMapping(path = "byMenuID/{id}")
+    /*@GetMapping(path = "byMenuID/{id}")
     @PreAuthorize("hasAuthority('admin:read')")
-    ResponseEntity<?> findByMenuId(@PathVariable Integer id) {
-        List<Piatto> piatti = piattoService.findByMenuId(id);
+    ResponseEntity<?> findByMenuId(@PathVariable Menu menu) {
+        List<Piatto> piatti = piattoService.findByMenuId(menu);
         return new ResponseEntity<>(piatti, HttpStatus.OK);
-    }
+    }*/
 
     @PostMapping
     @PreAuthorize("hasAuthority('admin:create')")
