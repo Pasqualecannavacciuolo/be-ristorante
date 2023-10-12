@@ -22,7 +22,18 @@ public class UtenteService {
     PasswordEncoder passwordEncoder;
 
     public Utente findById(Integer id) {
-        return utenteRepository.findById(id).orElse(null);
+        return utenteRepository.findById(id).orElseThrow();
+    }
+
+    public Utente findUserByEmail(Object parametri) throws JsonProcessingException {
+        // Crea un ObjectMapper
+        ObjectMapper objectMapper = new ObjectMapper();
+        // Converte l'oggetto in formato JSON
+        String jsonString = objectMapper.writeValueAsString(parametri);
+        JsonNode node = objectMapper.readValue(jsonString, JsonNode.class);
+        JsonNode emailNode = node.get("email");
+        String emailValue = emailNode.asText();
+        return utenteRepository.findUserByEmail(emailValue).orElseThrow();
     }
 
     public Utente findByEmail(String email) {
