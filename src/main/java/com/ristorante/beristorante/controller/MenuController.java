@@ -65,11 +65,6 @@ public class MenuController {
         return new ResponseEntity<>(new_menu_where_to_add,HttpStatus.OK);
     }
 
-    /*@PutMapping(path = "/{id}")
-    @PreAuthorize("hasAuthority('admin:update')")
-    ResponseEntity<Menu> changeOne(@RequestBody Object parametri, @PathVariable Integer id) throws JsonProcessingException {
-        return new ResponseEntity<>(menuService.changeOne(parametri, id), HttpStatus.OK);
-    }*/
 
     @PutMapping(path = "/{id}")
     @PreAuthorize("hasAuthority('admin:update')")
