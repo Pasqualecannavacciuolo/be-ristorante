@@ -28,7 +28,7 @@ public class UtenteController {
     @Autowired
     UtenteService utenteService;
     
-    
+
     @GetMapping(path = "/")
     @PreAuthorize("hasAuthority('admin:read')")
     ResponseEntity<?> findAll() {
@@ -83,15 +83,32 @@ public class UtenteController {
     @PostMapping
     @PreAuthorize("hasAuthority('admin:create')")
     ResponseEntity<Utente> saveOne(@RequestBody Utente utente) {
-        Utente utente1 = utenteService.saveOne(utente);
-        return new ResponseEntity<>(utente1, HttpStatus.OK);
+        try {
+            result = new ResponseEntity<Utente>(utenteService.saveOne(utente), HttpStatus.OK);
+            logger.info("UTENTI - saveOne - Status: 200");
+            Utente utenteToSave = utenteService.saveOne(utente);
+            return new ResponseEntity<>(utenteToSave, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Message: "+e.getMessage()+" - Value: "+e.getCause());
+            logger.error("UTENTI - saveOne - Status: "+HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
 
     @PutMapping(path = "/{id}")
     @PreAuthorize("hasAuthority('admin:update')")
     ResponseEntity<Utente> changeOne(@RequestBody Utente newUtente, @PathVariable Integer id) {
-        return new ResponseEntity<>(utenteService.changeOne(newUtente, id), HttpStatus.OK);
+        try {
+            result = new ResponseEntity<>(utenteService.changeOne(newUtente, id), HttpStatus.OK);
+            logger.info("UTENTI - changeOne - Status: 200");
+            Utente utenteToUpdate = utenteService.changeOne(newUtente, id);
+            return new ResponseEntity<>(utenteToUpdate, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Message: "+e.getMessage()+" - Value: "+e.getCause());
+            logger.error("UTENTI - changeOne - Status: "+HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }
     }
 
 
@@ -108,7 +125,15 @@ public class UtenteController {
         String message = "Utente con id =>"+id+" è stato cancellato con successo!";
         Map<String, String> deleteMessage = new HashMap<>();
         deleteMessage.put("message", message);
-        utenteService.deleteOne(id);
-        return new ResponseEntity<>(deleteMessage, HttpStatus.OK);
+        try {
+            utenteService.deleteOne(id);
+            result = new ResponseEntity<>(deleteMessage, HttpStatus.OK);
+            logger.info("UTENTI - deleteOne - Status: 200");
+            return new ResponseEntity<>(deleteMessage, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Message: "+e.getMessage()+" - Value: "+e.getCause());
+            logger.error("UTENTI - deleteOne - Status: "+HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

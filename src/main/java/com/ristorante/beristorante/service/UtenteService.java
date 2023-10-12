@@ -84,10 +84,11 @@ public class UtenteService {
             utente.setUltimo_accesso(newUtente.getUltimo_accesso());
             return utenteRepository.save(utente);
         })
-        .orElseGet(() -> {
+        .orElseThrow();
+        /*.orElseGet(() -> {
             newUtente.setId(id);
             return utenteRepository.save(newUtente);
-          });
+          });*/
         //return utenteRepository.save(newUtente);
     }
 
