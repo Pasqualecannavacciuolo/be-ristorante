@@ -47,6 +47,8 @@ public class MenuService {
         // Converte l'oggetto in formato JSON
         String jsonString = objectMapper.writeValueAsString(lista_piatti);
         JSONArray jsonArr = new JSONArray(jsonString);
+        
+        // Popolo la Lista dei Piatti con i piatti provenienti dal Frontend contenuti in jsonArr
         List<Piatto> piattiFromFrontend =  new ArrayList<>();
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject jsonObj = jsonArr.getJSONObject(i);
@@ -57,29 +59,11 @@ public class MenuService {
             piatto.setDescrizione(jsonObj.getString("descrizione"));
             piattiFromFrontend.add(piatto);
         }
-        System.out.println("JSON_STRING: "+piattiFromFrontend);
 
-        List<Piatto> tmp_set = new ArrayList<Piatto>();
-        for (int i = 0; i < piattiFromFrontend.size(); i++) {          
-            tmp_set.add(piattiFromFrontend.get(i));
-            menu_where_to_add.setLista_piatti(tmp_set);
-            saveOne(menu_where_to_add);
-        }
-        /*JsonNode node = objectMapper.readValue(jsonString, JsonNode.class);
-        JsonNode newListPiattiNode = node.get("piatti");
-        ArrayList<Integer> id_lista_piatti = new ArrayList<>();
-        for (JsonNode element : newListPiattiNode) {
-            Integer id = element.asInt();
-            id_lista_piatti.add(id);
-        }
+        // Aggiorno la lista dei piatti per questo menu specifico
+        menu_where_to_add.setLista_piatti(piattiFromFrontend);
+        saveOne(menu_where_to_add);
 
-        Set<Piatto> tmp_set = menu_where_to_add.getLista_piatti();
-        for (int i = 0; i < id_lista_piatti.size(); i++) {
-            Piatto piatto_tmp_to_find = piattoService.findById(id_lista_piatti.get(i));            
-            tmp_set.add(piatto_tmp_to_find);
-            menu_where_to_add.setLista_piatti(tmp_set);
-            saveOne(menu_where_to_add);
-        }*/
         return menu_where_to_add;
     }
 
