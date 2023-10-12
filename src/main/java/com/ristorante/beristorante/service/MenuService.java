@@ -59,7 +59,7 @@ public class MenuService {
         }
         System.out.println("JSON_STRING: "+piattiFromFrontend);
 
-        List<Piatto> tmp_set = menu_where_to_add.getLista_piatti();
+        List<Piatto> tmp_set = new ArrayList<Piatto>();
         for (int i = 0; i < piattiFromFrontend.size(); i++) {          
             tmp_set.add(piattiFromFrontend.get(i));
             menu_where_to_add.setLista_piatti(tmp_set);
